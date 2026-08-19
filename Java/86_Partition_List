@@ -1,0 +1,47 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+  public class ListNode {
+        int val;
+        ListNode next;
+        ListNode() {}
+        ListNode(int val) { this.val = val; }
+        ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+    }
+    public ListNode partition(ListNode head, int x) {
+        //create dummy listnode for small and large nodes
+        ListNode smallDummy=new ListNode();
+        ListNode largeDummy=new ListNode();
+        // set the pointer for small and large list
+        ListNode small=smallDummy;
+        ListNode large=largeDummy;
+        //to triverse
+        ListNode curr=head;
+        //start the triverse
+        while(curr!=null){
+            //add nodes smaller than x in small without changing relative order
+            if(curr.val<x){
+                small.next=curr;
+                small=small.next;
+            }
+            // else add in large
+            else{
+                large.next=curr;
+                large=large.next;
+            }
+            curr=curr.next;
+        }
+        large.next=null;//end of the list
+        //mergethe large and small list
+        small.next=largeDummy.next;
+        return smallDummy.next;
+    }
+}
